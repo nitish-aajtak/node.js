@@ -11,6 +11,9 @@ const shop = require('./routes/shop');
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')));
 
+app.set('view engine' , 'pug');
+app.set('/views', 'views');
+
 app.use('/admin',admin.routes);
 
 app.use(shop);
