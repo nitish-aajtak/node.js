@@ -11,7 +11,7 @@ const shop = require('./routes/shop');
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname,'public')));
 
-app.set('view engine' , 'pug');
+app.set('view engine' , 'ejs');
 app.set('/views', 'views');
 
 app.use('/admin',admin.routes);
@@ -19,7 +19,8 @@ app.use('/admin',admin.routes);
 app.use(shop);
 
 app.use((req,res,next)=>{
-    res.status(404).sendFile(path.join(__dirname,'views','404.html'))
+    // res.status(404).sendFile(path.join(__dirname,'views','404.html'))
+    res.render('404',{title:"Page Not FOund"});
 })
 
 app.listen(4000);

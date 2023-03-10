@@ -11,7 +11,7 @@ const products = [];
 router.get('/add-product',(req,res,next) => {
     // res.send('<h1>Currently in product section </h1>');
     // console.log(rootDir)
-    res.sendFile(path.join(rootDir,'views','add-product.html'));
+    res.render('add-product',{title:req.body.title,path:"/admin/add-product"});
 })
 router.post('/add-product' ,(req,res,next)=>{
     // console.log(req.body);
