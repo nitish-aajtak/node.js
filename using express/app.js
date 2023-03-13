@@ -1,24 +1,24 @@
-const express = require('express');
 const path = require('path');
 
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const errorController = require('./controllers/error');
+
 const app = express();
-const bodyparser = require('body-parser');
 
-const admin = require('./routes/admin');
-const shop = require('./routes/shop');
-const productsController  = require('./controllers/product');
-
-// express does not process incoming requests thus we need to middleware to a parse incoming request body 
-app.use(bodyparser.urlencoded({extended:false}))
-app.use(express.static(path.join(__dirname,'public')));
-
-app.set('view engine' , 'ejs');
+app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-app.use('/admin',admin.routes);
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use(shop);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(productsController.error);
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 
-app.listen(4000);
+app.use(errorController.get404);
+
+app.listen(3000);
