@@ -21,8 +21,10 @@ exports.products = (req,res,next) => {
     // res.sendFile(path.join(rootDir,'views','shop.html'));
     // const products = admin.products;
     // console.log(products);
-    const products = Product.fetchAll();
-    res.render('shop', ({prods:products, title:"shop " ,path:'/'}));
+    Product.fetchAll(products =>{
+        res.render('shop', ({prods:products, title:"shop" ,path:'/'}));
+    });
+    
 }
 
 exports.error = ((req,res,next)=>{
